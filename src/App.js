@@ -1,43 +1,68 @@
 import React, { Component } from 'react';
 import './App.css';
+import Header from './Header.js';
+import Main from './Main.js';
+import Footer from './Footer.js';
 import axios from 'axios';
+
+const Representatives = (props) => {
+  return(
+    <div className="repCard">
+        <h2>{props.name}</h2>
+        <p>{props.office}</p>
+        <p>{props.level}</p>
+        <p>{props.district_name}</p>
+        <p>{props.party}</p>
+        <div className="repContact">
+          <p>{props.phoneLocation}</p>
+          <a href={props.phoneType}>{props.phoneType}</a>
+          <a href={props.email}>{props.email}</a>
+          <a href={props.url}>{props.url}</a>
+        </div>
+
+    </div>
+       
+  )
+}
 
 class App extends Component {
   constructor(){
     super();
     this.state = {
       userReps: [],
-      userMayor: [],
       userPostalCode: '',
-      query: ''
+      query: '',
     }
   }
 
-    handleSubmit = (e) => {
-      e.preventDefault();
-      const queryReset = this.state.query;
-      axios({
-        method: 'GET',
-        url: 'http://proxy.hackeryou.com',
-        dataResponse: 'json',
-        params: {
-          reqUrl: `https://represent.opennorth.ca/postcodes/${this.state.userPostalCode}`,
-          xmlToJSON: false,
-          q: queryReset
-        }}).then((res) => {
-            const repsResult = res.data.representatives_centroid;
-            console.log(repsResult);
 
 
-            let uniqueRepsResult = repsResult.map(reps => {
-              return reps.elected_office
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const queryReset = this.state.query;
+    axios({
+      method: 'GET',
+      url: 'http://proxy.hackeryou.com',
+      dataResponse: 'json',
+      params: {
+        reqUrl: `https://represent.opennorth.ca/postcodes/${this.state.userPostalCode}`,
+        xmlToJSON: false,
+        q: queryReset
+      }}).then((res) => {
+            const apiResult = res.data.representatives_centroid;
+            const dataArray = [];
+            const checkArray = [];
+
+            apiResult.forEach(rep => {
+              if (checkArray.includes(rep.name) === false){
+                checkArray.push(rep.name);
+                dataArray.push(rep);
+              } 
+              console.log(dataArray);
             })
-            
-            // [... new Set(repsResult)]
-            console.log(uniqueRepsResult);
             this.setState({
-            userReps: repsResult
-          })
+              userReps: dataArray
+            })
         });
     }
 
@@ -54,48 +79,36 @@ class App extends Component {
         userPostalCode: e.target.value
         })
       }
-      
     }
-//     componentDidMount(){
-//       // axios({
-//       //   method:'GET',
-//       //   url:'http://represent.opennorth.ca/postcodes/M6P2S1',
-//       //   dataType: 'json',
-//       // }).then(response => {
-//       //   console.log(response)
-//       // })
-// //proxy server
-      
-//     }
 
   render() {
     return (
       <div className="App">
-        <h1>Know your government</h1>
-        <h2>Find your local representatives.</h2>
-        <form action="submit" onSubmit={this.handleSubmit}>
-          <label htmlFor="postCode">Enter your postal code:</label>
-          <input type="text" placeholder="enter your postal code (i.e A1A1A1" onChange={this.handleChange}/>
-          <button type="submit">Find out!</button>
-        </form>
-        {/* {
-          this.state.userReps.map(rep => {
-            return(
-              <div key={rep.i}>
-                <Reps 
-                  title={rep.name}
-                  district={rep.district_name}
-                  office={rep.elected_office}
-                  party={rep.party_name}
-                  leg={rep.representative_set_name}
-                  website={rep.url}
-                  email={rep.email}
-                  phone={rep.offices[0].type, rep.offices[0].tel}
-                />
-              </div>
-            )
-          })
-        } */}
+        <div className="wrapper">
+          <Header />
+        <Main handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
+        <ul className="repInfo">
+            {this.state.userReps.map(rep => {
+              return(
+               <li key={rep.last_name}>
+                  <Representatives
+                   name= {rep.name}
+                   office = {rep.elected_office}
+                   level= {rep.representative_set_name}
+                   riding = {rep.district_name}
+                   party = {rep.party_name}
+                   email = {rep.email}
+                   phoneType = {rep.offices[0].tel} 
+                   phoneLocation= {rep.offices[0].type}
+                   url = {rep.url}                 
+                  />
+               </li>
+              )
+            })
+            }
+        </ul>
+        <Footer />
+        </div> 
       </div>
     );
   }
