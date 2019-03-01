@@ -3,9 +3,16 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 .clearfix:after {visibility: hidden; display: block; font-size: 0; content: ''; clear: both; height: 0; }
 
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+/* 
+@import url('href="https://fonts.googleapis.com/css?family=Fira+Sans|Montserrat'); */
 
 html {
   font-size: 125%;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-family: 'Fira Sans', Arial, Helvetica, sans-serif;
 }
 
 h1,
@@ -35,8 +42,6 @@ li {
   margin: 0 auto;
   border: 1px solid white;
 }
-
-
 
 .repInfo {
   list-style-type: none;

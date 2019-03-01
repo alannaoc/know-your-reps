@@ -4,7 +4,7 @@ class Footer extends Component {
   render(){
     return(
       <div>
-        <footer>Know Your Government | Get Involved</footer>
+        <footer>Know Your Government | Data Provided by <a href="https://represent.opennorth.ca/">Represent</a></footer>
       </div>
     )
   }

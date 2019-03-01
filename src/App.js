@@ -2,28 +2,22 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './Header.js';
 import Main from './Main.js';
+import Representatives from './Representatives';
 import Footer from './Footer.js';
+import firebase from 'firebase';
 import axios from 'axios';
 
-const Representatives = (props) => {
-  return(
-    <div className="repCard">
-        <h2>{props.name}</h2>
-        <p>{props.office}</p>
-        <p>{props.level}</p>
-        <p>{props.district_name}</p>
-        <p>{props.party}</p>
-        <div className="repContact">
-          <p>{props.phoneLocation}</p>
-          <a href={props.phoneType}>{props.phoneType}</a>
-          <a href={props.email}>{props.email}</a>
-          <a href={props.url}>{props.url}</a>
-        </div>
 
-    </div>
-       
-  )
-}
+const config = {
+  apiKey: "AIzaSyB35apiwRzurbwgK47HavC3uT4YUlkAHsM",
+  authDomain: "know-your-government-35104.firebaseapp.com",
+  databaseURL: "https://know-your-government-35104.firebaseio.com",
+  projectId: "know-your-government-35104",
+  storageBucket: "know-your-government-35104.appspot.com",
+  messagingSenderId: "690763001616"
+};
+
+firebase.initializeApp(config);
 
 class App extends Component {
   constructor(){
@@ -31,15 +25,12 @@ class App extends Component {
     this.state = {
       userReps: [],
       userPostalCode: '',
-      query: '',
+      savedUserReps: []
     }
   }
 
-
-
   handleSubmit = (e) => {
     e.preventDefault();
-    const queryReset = this.state.query;
     axios({
       method: 'GET',
       url: 'http://proxy.hackeryou.com',
@@ -47,7 +38,6 @@ class App extends Component {
       params: {
         reqUrl: `https://represent.opennorth.ca/postcodes/${this.state.userPostalCode}`,
         xmlToJSON: false,
-        q: queryReset
       }}).then((res) => {
             const apiResult = res.data.representatives_centroid;
             const dataArray = [];
@@ -58,38 +48,58 @@ class App extends Component {
                 checkArray.push(rep.name);
                 dataArray.push(rep);
               } 
-              console.log(dataArray);
             })
             this.setState({
-              userReps: dataArray
+              userReps: dataArray,
             })
         });
     }
 
  //handle change converts the user's input from lower case to uppercase and removes any white spaces. 
-    handleChange = (e) => {
-     e.target.value = e.target.value.toUpperCase();
-      if (e.target.value.indexOf(' ') >= 0) {
-        this.setState({
-          userPostalCode: e.target.value.replace(/\s/g, '')
-        })
-        console.log(e.target.value.replace(/\s/g, ''));
-      } else {
+  handleChange = (e) => {
+   e.target.value = e.target.value.toUpperCase();
+    if (e.target.value.indexOf(' ') >= 0) {
+      this.setState({
+        userPostalCode: e.target.value.replace(/\s/g, '')
+      })
+    } else {
         this.setState({
         userPostalCode: e.target.value
         })
       }
-    }
+  }
+
+  componentDidMount() {
+    const dbRef = firebase.database().ref();
+    dbRef.on('value', (response) => {
+      const newState =[];
+      const data = response.val();
+      for (let key in data) {
+        newState.push(data[key]);
+      }
+      this.setState({
+        savedUserReps: newState
+      });
+      
+    });
+  }
 
   render() {
     return (
       <div className="App">
         <div className="wrapper">
           <Header />
-        <Main handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
-        <ul className="repInfo">
+          <Main handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
+          <h2>
+            {
+            this.state.userPostalCode
+          }
+          </h2>
+          
+          <ul className="repInfo">
             {this.state.userReps.map(rep => {
               return(
+               
                <li key={rep.last_name}>
                   <Representatives
                    name= {rep.name}
@@ -100,13 +110,14 @@ class App extends Component {
                    email = {rep.email}
                    phoneType = {rep.offices[0].tel} 
                    phoneLocation= {rep.offices[0].type}
-                   url = {rep.url}                 
+                   url = {rep.url}            
                   />
                </li>
+               
               )
-            })
-            }
-        </ul>
+            })}
+          </ul>
+          <button>Save Representatives</button>
         <Footer />
         </div> 
       </div>
