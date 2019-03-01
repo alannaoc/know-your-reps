@@ -4,20 +4,9 @@ import Header from './Header.js';
 import Main from './Main.js';
 import Representatives from './Representatives';
 import Footer from './Footer.js';
-import firebase from 'firebase';
+import MyReps from './MyReps.js';
+import firebase from './firebase.js';
 import axios from 'axios';
-
-
-const config = {
-  apiKey: "AIzaSyB35apiwRzurbwgK47HavC3uT4YUlkAHsM",
-  authDomain: "know-your-government-35104.firebaseapp.com",
-  databaseURL: "https://know-your-government-35104.firebaseio.com",
-  projectId: "know-your-government-35104",
-  storageBucket: "know-your-government-35104.appspot.com",
-  messagingSenderId: "690763001616"
-};
-
-firebase.initializeApp(config);
 
 class App extends Component {
   constructor(){
@@ -25,8 +14,26 @@ class App extends Component {
     this.state = {
       userReps: [],
       userPostalCode: '',
-      savedUserReps: []
+      savedUserReps: [],
     }
+  }
+
+  removeButton = () => {
+    console.log('bye');
+    // const dbRef = firebase.database().ref(userReps)
+    // dbRef.remove();
+
+    // accept parameter 
+  }
+
+  saveButton = () => {
+    console.log('hi')
+    // const dbref=firebase.database().ref();
+
+    // dbref.push(this.state.userReps)
+    // this.setState({
+    //   savedUserReps: this.state.userReps
+    //accept object 
   }
 
   handleSubmit = (e) => {
@@ -43,14 +50,18 @@ class App extends Component {
             const dataArray = [];
             const checkArray = [];
 
+            console.log(dataArray);
             apiResult.forEach(rep => {
               if (checkArray.includes(rep.name) === false){
                 checkArray.push(rep.name);
                 dataArray.push(rep);
               } 
             })
+
+            //for each on data array 
             this.setState({
               userReps: dataArray,
+              userPostalCode: ''
             })
         });
     }
@@ -74,9 +85,11 @@ class App extends Component {
     dbRef.on('value', (response) => {
       const newState =[];
       const data = response.val();
+
       for (let key in data) {
         newState.push(data[key]);
       }
+
       this.setState({
         savedUserReps: newState
       });
@@ -89,35 +102,43 @@ class App extends Component {
       <div className="App">
         <div className="wrapper">
           <Header />
-          <Main handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
-          <h2>
-            {
-            this.state.userPostalCode
-          }
-          </h2>
-          
+          <Main handleSubmit={this.handleSubmit} handleChange={this.handleChange} userPostalCode={this.state.userPostalCode}/>
           <ul className="repInfo">
             {this.state.userReps.map(rep => {
-              return(
-               
+              return(   
                <li key={rep.last_name}>
                   <Representatives
                    name= {rep.name}
                    office = {rep.elected_office}
-                   level= {rep.representative_set_name}
                    riding = {rep.district_name}
                    party = {rep.party_name}
                    email = {rep.email}
                    phoneType = {rep.offices[0].tel} 
                    phoneLocation= {rep.offices[0].type}
-                   url = {rep.url}            
+                   url = {rep.url}   
+                   
+                    saveButton={this.saveButton} removeButton={this.removeButton}
                   />
                </li>
-               
               )
             })}
           </ul>
-          <button>Save Representatives</button>
+        {this.state.userReps.map(rep => {
+          return(
+            <li key={rep.last_name}>
+              <MyReps
+                name={rep.name}
+                office={rep.elected_office}
+                riding={rep.district_name}
+                party={rep.party_name}
+                email={rep.email}
+                phoneType={rep.offices[0].tel}
+                phoneLocation={rep.offices[0].type}
+                url={rep.url}
+              />
+            </li>
+        )
+        })}
         <Footer />
         </div> 
       </div>
