@@ -1,5 +1,16 @@
 .Header {
   color: aqua;
+  min-height: 90vh;
+  display: flex;
+  
+  
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .skipLink {
