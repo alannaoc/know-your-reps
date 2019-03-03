@@ -1,0 +1,32 @@
+/* icons used to create background image: 
+canadian flag: Kelsey Chisamore 
+cloud: Alena, RU 
+sun: SELicon, ID  
+parliament: Dinosoft Labs, PK */
+
+.Header {
+  min-height: 95vh;
+  display: flex;
+  background: url(../assets/parliament.png) no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  color: darkgreen;
+}
+
+h1 {
+  text-transform: uppercase;
+}
+
+.formHeader {
+  background: rgba(255,255,255,0.8);
+  border-radius: 10px;
+  padding: 40px 30px;
+}

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
+import './styles/App.css';
 import Header from './Components/Header.js';
 import Main from './Components/Main.js';
-import Representatives from './Components/Representatives';
 import Footer from './Components/Footer.js';
+import {animateScroll as scroll } from "react-scroll";
 import axios from 'axios';
 
 class App extends Component {
@@ -12,7 +12,15 @@ class App extends Component {
     this.state = {
       userReps: [],
       userPostalCode: '',
+      show: false
     }
+  }
+  handleClick = () => {
+    scroll.scrollMore(1000, {
+      duration: 2800,
+      delay: 200,
+      smooth: true
+    })
   }
 
   handleSubmit = (e) => {
@@ -36,9 +44,10 @@ class App extends Component {
             })
             this.setState({
               userReps: dataArray,
+              show: true
             })
         });
-    }
+  }
  //handle change converts the user's input from lower case to uppercase and removes any white spaces. 
   handleChange = (e) => {
    e.target.value = e.target.value.toUpperCase();
@@ -55,11 +64,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="wrapper">
-          <Header handleSubmit={this.handleSubmit} handleChange={this.handleChange} userPostalCode={this.state.userPostalCode} />
-          <Main id="results" userReps={this.state.userReps} />   
-          <Footer />
-        </div> 
+        <Header handleSubmit={this.handleSubmit} handleChange={this.handleChange} userPostalCode={this.state.userPostalCode} handleClick={this.handleClick}/>
+        {(this.state.show === true) ?
+          (<Main id="results" userReps={this.state.userReps} userPostalCode={this.state.userPostalCode}/>) : (
+            <div></div>
+          )
+        }
+        <Footer />
       </div>
     );
   }
