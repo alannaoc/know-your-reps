@@ -1,12 +1,20 @@
 
+.riding {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
 .repContact a {
   display: block;
   text-decoration: none;
   transition: all .2s ease-in-out;
+  border-bottom: .5px solid transparent;
 }
 
-.repContact a:hover {
+.repContact a:hover,
+.repContact a:focus {
   color: darkgreen;
+  border-bottom: .5px solid darkgreen;
 }
 
 .repInfo {
@@ -28,14 +36,30 @@ p::first-letter{
 
 .repCard {
   background: #fff;
+  padding: 5px;
   border-radius: 20px;
   min-height: 250px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow-wrap: anywhere;
 }
 
 .fas {
   margin-right: 15px;
+}
+
+/* media queries */
+
+@media (max-width: 800px) {
+  .repInfo li {
+    width: 100%
+  }
+}
+
+@media (max-width: 400px) {
+  .fas {
+    display: none;
+  }
 }
