@@ -4,6 +4,7 @@ import Header from './Components/Header.js';
 import Main from './Components/Main.js';
 import Footer from './Components/Footer.js';
 import {animateScroll as scroll } from "react-scroll";
+import firebase from './Components/firebase.js';
 import axios from 'axios';
 
 class App extends Component {
@@ -11,19 +12,23 @@ class App extends Component {
     super();
     this.state = {
       userReps: [],
+      savedReps: [],
       userPostalCode: '',
-      show: false
+      show: false,
+      showSavedReps: false,
     }
   }
 
+  //function for smooth scroll to results
   handleClick = () => {
-    scroll.scrollMore(1000, {
+    scroll.scrollMore(700, {
       duration: 2800,
       delay: 200,
       smooth: true
     })
   }
 
+  //function for smooth scroll to top of page
   handleClickTop = () => {
     scroll.scrollToTop({
       duration: 2800,
@@ -32,6 +37,40 @@ class App extends Component {
     })
   }
 
+  //firebase function to store saved results
+  componentDidMount(){
+    const dbref = firebase.database().ref();
+    dbref.on('value', response => {
+      const newState = [];
+      const data = response.val();
+      
+      for (let key in data){
+        newState.push({
+        key: key,
+        title: data[key]
+        })
+      }
+      this.setState({
+        savedReps: newState
+      })
+    })
+  }
+
+  //function to save user reps to firebase
+  saveButton = (e) => {
+    e.preventDefault();
+    const dbRef = firebase.database().ref();
+    dbRef.push(this.state.userReps);
+  }
+
+  // function to remove user reps from firebase
+  removeButton = (repId) => {
+    console.log('test');
+    const dbRef = firebase.database().ref(repId);
+    dbRef.remove();
+  }
+
+  //function for axios call 
   handleSubmit = (e) => {
     e.preventDefault();
     axios({
@@ -67,7 +106,7 @@ class App extends Component {
                 const repInfo = {key, name, office, riding, party, email, phone, url, personalUrl};
                 finalArray.push(repInfo);
             })
-            
+
             this.setState({
               userReps: finalArray,
               show: true
@@ -88,12 +127,13 @@ class App extends Component {
         })
       }
   }
+
   render() {
     return (
       <div className="App">
         <Header handleSubmit={this.handleSubmit} handleChange={this.handleChange} userPostalCode={this.state.userPostalCode} handleClick={this.handleClick}/>
         {(this.state.show === true) ?
-          (<Main id="results" handleClickTop={this.handleClickTop} userReps={this.state.userReps} userPostalCode={this.state.userPostalCode}/>) : (
+          (<Main id="results" handleClickTop={this.handleClickTop} userReps={this.state.userReps} savedReps={this.state.savedReps} handleClick={this.handleClick} userPostalCode={this.state.userPostalCode} saveButton={this.saveButton} removeButton={this.removeButton}/>) : (
             <div></div>
           )
         }

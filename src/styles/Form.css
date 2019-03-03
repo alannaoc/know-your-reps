@@ -14,9 +14,6 @@ input:focus{
   border: 1px solid darkgreen;
 }
 
-button:focus {
-  border: 1px solid black;
-}
 
 label {
   margin: 0 10px 5px 0;
@@ -27,4 +24,10 @@ label {
 button {
   background: darkgreen;
   color: white;
+  transition: all .2s ease-in-out;
+}
+
+.formSubmit:hover,
+.formSubmit:focus {
+  background: rgb(255, 0, 0);
 }

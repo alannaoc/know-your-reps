@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import '../styles/Representatives.css';
+import '../styles/SavedReps.css';
 
-class Representatives extends Component {
+class SavedReps extends Component {
   render(){
     return(
       <div className="Representatives">
@@ -19,7 +19,8 @@ class Representatives extends Component {
           </div>
         </div>
       </div>
-    )    
+    )
   }
 }
-export default Representatives;
+
+export default SavedReps;
