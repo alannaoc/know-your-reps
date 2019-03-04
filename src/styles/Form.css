@@ -8,6 +8,11 @@ input, button {
   padding: 5px 10px;
   border: 1px solid transparent;
   text-align: center;
+  
+}
+
+.headerInput{
+  width: 100%;
 }
 
 input:focus{
