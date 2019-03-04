@@ -86,7 +86,7 @@ class App extends Component {
       
     axios({
       method: 'GET',
-      url: 'http://proxy.hackeryou.com',
+      url: 'https://proxy.hackeryou.com',
       dataResponse: 'json',
       params: {
         reqUrl: `https://represent.opennorth.ca/postcodes/${this.state.userPostalCode}`,
