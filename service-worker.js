@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "%20//AEOConnor.github.io/alannaOConnorProject5/precache-manifest.e9638e022d5650f65f4e336e1573eb90.js"
+  "/alannaOConnorProject5/precache-manifest.e0ae45bc73d096f016df177eb2de87f9.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("%20//AEOConnor.github.io/alannaOConnorProject5/index.html", {
+workbox.routing.registerNavigationRoute("/alannaOConnorProject5/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
