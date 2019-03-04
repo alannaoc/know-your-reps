@@ -80,12 +80,9 @@ class App extends Component {
     e.preventDefault();
     axios({
       method: 'GET',
-      url: 'http://proxy.hackeryou.com',
+      url: `https://represent.opennorth.ca/postcodes/${this.state.userPostalCode}`,
       dataResponse: 'json',
-      params: {
-        reqUrl: `https://represent.opennorth.ca/postcodes/${this.state.userPostalCode}`,
-        xmlToJSON: false,
-      }}).then((res) => {
+      }).then((res) => {
           const apiResult = res.data.representatives_centroid;
           const dataArray = [];
           const checkArray = [];
