@@ -37,9 +37,8 @@ class Main extends Component {
             <div>
               <ul className="repInfo savedRep">
                 {this.props.savedReps.map(rep => {
-                    console.log(rep.key)
-                   return rep.title.map(info => {
-                    
+                  console.log(rep.key)
+                  return rep.title.map(info => {
                     return (
                       <li key={info.key}>
                         <SavedReps
@@ -54,11 +53,11 @@ class Main extends Component {
                         />
                         <button className="button" onClick={() => this.props.removeButton(info.key)}>Remove rep</button>
                       </li>
-                    )});
-                  })}
+                    )
+                  });
+                })}
               </ul>
             </div>
-            
           <button className="button" onClick={this.props.handleClickTop}>Back to top</button>
         </section>
         </main>        

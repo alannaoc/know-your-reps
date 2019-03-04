@@ -13,7 +13,9 @@ class SavedReps extends Component {
             <a href={this.props.phone}><i className="fas fa-phone" aria-hidden="true"></i><span className="sr-only">Call {this.props.name}</span>{this.props.phone}</a>
             <a href={this.props.email}><i className="fas fa-envelope" aria-hidden="true"></i><span className="sr-only">Email {this.props.name}</span>{this.props.email}</a>
             {(this.props.url) ?
-              (<a href={this.props.url} className="url">Visit {this.props.name}'s website</a>) : (<a href={this.props.personalUrl} className="url">Visit {this.props.name}'s website</a>)
+              (<a href={this.props.url} className="url">Visit {this.props.name}'s website</a>) ||
+              (<a href={this.props.personalUrl} className="url">Visit {this.props.name}'s website</a>) :
+              null
             }
           </div>
         </div>
