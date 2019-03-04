@@ -37,7 +37,6 @@ class Main extends Component {
             <div>
               <ul className="repInfo savedRep">
                 {this.props.savedReps.map(rep => {
-                  console.log(rep.key)
                   return rep.title.map(info => {
                     return (
                       <li key={info.key}>

@@ -93,7 +93,6 @@ class App extends Component {
         xmlToJSON: false,
       }
     }).then((res) => {
-      console.log(res)
           const apiResult = res.data.representatives_centroid;
           const dataArray = [];
           const checkArray = [];
