@@ -15,7 +15,6 @@ class App extends Component {
       savedReps: [],
       userPostalCode: '',
       show: false,
-      showSavedReps: false,
     }
   }
 
@@ -43,12 +42,11 @@ class App extends Component {
     dbref.on('value', response => {
       const newState = [];
       const data = response.val();
-      
       for (let key in data){
         newState.push({
         key: key,
         title: data[key]
-        })
+        }) 
       }
       this.setState({
         savedReps: newState
@@ -64,10 +62,17 @@ class App extends Component {
   }
 
   // function to remove user reps from firebase
-  removeButton = (repId) => {
-    console.log('test');
-    const dbRef = firebase.database().ref(repId);
-    dbRef.remove();
+  removeButton = (e) => {
+    this.state.savedReps.forEach(rep => {
+      if(rep.key){
+        rep.title.forEach(item => {
+        if (item.key === e){
+          const dbRef = firebase.database().ref(rep.key);
+          dbRef.remove();
+        }
+      })
+      }
+    })
   }
 
   //function for axios call 
@@ -81,37 +86,37 @@ class App extends Component {
         reqUrl: `https://represent.opennorth.ca/postcodes/${this.state.userPostalCode}`,
         xmlToJSON: false,
       }}).then((res) => {
-            const apiResult = res.data.representatives_centroid;
-            const dataArray = [];
-            const checkArray = [];
-            const finalArray = [];
+          const apiResult = res.data.representatives_centroid;
+          const dataArray = [];
+          const checkArray = [];
+          const finalArray = [];
              
-            apiResult.forEach(rep => {
-              if (checkArray.includes(rep.name) === false){
-                checkArray.push(rep.name);
-                dataArray.push(rep);
-              } 
-            })
+          apiResult.forEach(rep => {
+            if (checkArray.includes(rep.name) === false){
+              checkArray.push(rep.name);
+              dataArray.push(rep);
+            } 
+          })
 
-           dataArray.forEach(rep => {
-                const key = rep.last_name;
-                const name = rep.name;
-                const office = rep.elected_office;
-                const riding = rep.district_name;
-                const party = rep.party_name;
-                const email = rep.email;
-                const phone = rep.offices[0].tel;
-                const url = rep.url;
-                const personalUrl = rep.personal_url;
-                const repInfo = {key, name, office, riding, party, email, phone, url, personalUrl};
-                finalArray.push(repInfo);
-            })
+          dataArray.forEach(rep => {
+            const key = rep.last_name;
+            const name = rep.name;
+            const office = rep.elected_office;
+            const riding = rep.district_name;
+            const party = rep.party_name;
+            const email = rep.email;
+            const phone = rep.offices[0].tel;
+            const url = rep.url;
+            const personalUrl= rep.personal_url;
+            const repInfo = {key, name, office, riding, party, email, phone, url, personalUrl};
+            finalArray.push(repInfo);
+          })
 
-            this.setState({
-              userReps: finalArray,
-              show: true
-            })
-        });
+          this.setState({
+            userReps: finalArray,
+            show: true
+          })
+      });
   }
 
  //handle change converts the user's input from lower case to uppercase and removes any white spaces. 
@@ -134,7 +139,7 @@ class App extends Component {
         <Header handleSubmit={this.handleSubmit} handleChange={this.handleChange} userPostalCode={this.state.userPostalCode} handleClick={this.handleClick}/>
         {(this.state.show === true) ?
           (<Main id="results" handleClickTop={this.handleClickTop} userReps={this.state.userReps} savedReps={this.state.savedReps} handleClick={this.handleClick} userPostalCode={this.state.userPostalCode} saveButton={this.saveButton} removeButton={this.removeButton}/>) : (
-            <div></div>
+            null
           )
         }
         <Footer />
@@ -142,5 +147,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;

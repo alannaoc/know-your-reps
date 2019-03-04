@@ -12,24 +12,15 @@
   letter-spacing: 2px;
 }
 
-.buttonTop,
-.saveReps,
-.showSavedReps,
-.removeReps {
+.button{
   padding: 5px 10px;
   margin-top: 10px;
   border: 1px solid white;
   transition: all .2s ease-in-out;
 }
 
-.buttonTop:hover,
-.buttonTop:focus,
-.saveReps:hover,
-.saveReps:focus,
-.showSavedReps:hover,
-.showSavedReps:focus,
-.removeReps:hover,
-.removeReps:focus {
+.button:hover,
+.button:focus {
   background: white;
   color: darkgreen;
 }

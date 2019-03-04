@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import '../styles/SavedReps.css';
 
 class SavedReps extends Component {
   render(){
     return(
-      <div className="Representatives">
+      <div className="Representatives savedRep">
         <div className="repCard">
           <h2>{this.props.name}</h2>
           <p className="riding">{this.props.office}</p>
@@ -22,5 +21,4 @@ class SavedReps extends Component {
     )
   }
 }
-
 export default SavedReps;
