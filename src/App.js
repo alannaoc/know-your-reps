@@ -78,11 +78,21 @@ class App extends Component {
   //function for axios call 
   handleSubmit = (e) => {
     e.preventDefault();
+    // axios({
+    //   method: 'GET',
+    //   url: `https://represent.opennorth.ca/postcodes/${this.state.userPostalCode}`,
+    //   dataResponse: 'json',
+    //   })
+      
     axios({
       method: 'GET',
-      url: `https://represent.opennorth.ca/postcodes/${this.state.userPostalCode}`,
+      url: 'http://proxy.hackeryou.com',
       dataResponse: 'json',
-      }).then((res) => {
+      params: {
+        reqUrl: `https://represent.opennorth.ca/postcodes/${this.state.userPostalCode}`,
+        xmlToJSON: false,
+      }
+    }).then((res) => {
           const apiResult = res.data.representatives_centroid;
           const dataArray = [];
           const checkArray = [];
