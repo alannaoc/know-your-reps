@@ -31,6 +31,11 @@ a {
   color: inherit;
 }
 
+img {
+  display: block;
+  width: 100%;
+}
+
 .wrapper {
   max-width: 1200px;
   margin: 0 auto;
@@ -39,3 +44,258 @@ a {
 .App {
   text-align: center;
 }
+
+/* Header styles begin */
+/* icons used to create background image: 
+canadian flag: Kelsey Chisamore 
+cloud: Alena, RU 
+sun: SELicon, ID  
+parliament: Dinosoft Labs, PK */
+
+.Header {
+  min-height: 95vh;
+  background: url(../assets/parliament.png) no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.Header,
+header {
+  display: flex;
+}
+
+header {
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  color: darkgreen;
+}
+
+h1 {
+  text-transform: uppercase;
+  line-height: 1;
+  padding-bottom: 20px;
+}
+
+.formHeader {
+  background: rgba(255,255,255,0.8);
+  border-radius: 10px;
+  padding: 40px 30px;
+}
+
+.login {
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.userName {
+  position: absolute;
+  right: 20vh;
+  top: 0;
+  width: 25%;
+  background:  rgba(255,255,255,0.8);
+  margin-top: 10px;
+}
+
+/* Header styles end */
+
+/* Form styles begin */
+fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+}
+
+input, 
+button {
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  text-align: center; 
+}
+
+.headerInput{
+  width: 100%;
+}
+
+input:focus{
+  border: 1px solid darkgreen;
+}
+
+label {
+  margin: 0 10px 5px 0;
+  padding: 10px 0;
+  line-height: 1;
+}
+
+button {
+  background: darkgreen;
+  color: white;
+  transition: all .2s ease-in-out;
+}
+
+.formSubmit:hover,
+.formSubmit:focus {
+  background: rgb(255, 0, 0);
+}
+/* Form styles end */
+
+/* Main styles begin */
+.Main {
+  background: rgb(0,100,0);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23ffffff' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+  min-height: 95vh;
+  padding: 30px 0;
+}
+
+.titlePC {
+  padding: 10px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.button{
+  padding: 5px 10px;
+  margin-top: 10px;
+  border: 1px solid white;
+  transition: all .2s ease-in-out;
+}
+
+.button:hover,
+.button:focus {
+  background: white;
+  color: darkgreen;
+}
+/* Main styles end */
+
+/* Representatives styles begin */
+
+.riding {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.repContact a {
+  display: block;
+  text-decoration: none;
+  transition: all .2s ease-in-out;
+  border-bottom: .5px solid transparent;
+}
+
+.repContact a:hover,
+.repContact a:focus {
+  color: darkgreen;
+  border-bottom: .5px solid darkgreen;
+}
+
+.repInfo {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.repInfo li {
+  width: calc(50% - 50px);
+  margin: 5px 25px;
+}
+
+p::first-letter{
+  text-transform: uppercase;
+}
+
+.repCard {
+  width: 100%;
+  background: #fff;
+  padding: 5px;
+  border-radius: 20px;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-wrap: anywhere;
+}
+
+.fas {
+  margin-right: 15px;
+}
+/* Representatives styles end */
+
+/* Saved reps styles begin */
+
+.savedRepsSection {
+  padding: 40px 0;
+}
+
+.savedRepsSection label {
+  color: white;
+  margin: 0;
+  padding: 0 10px;
+}
+
+select {
+  background: white;
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+select:hover,
+select:focus {
+  border: 1px solid  rgb(255, 0, 0); 
+}
+
+/* Footer styles begin */
+.Footer {
+  min-height: 5vh;
+  padding-top: 7px;
+  color: white;
+  font-size: .8rem;
+  background: rgb(105,105,105);
+}
+/* Footer styles end */
+
+/* Media queries begin */
+
+@media (max-width: 1090px){
+  .userName {
+    width: 40%;
+  }
+}
+@media (max-width: 800px) {
+  .repInfo li {
+    width: 100%
+  }
+}
+
+@media (max-width: 700px) {
+  .userName {
+    width: 60%;
+  }
+}
+
+@media (max-width: 600px) {
+  .userName {
+    width: 100%;
+    top: 70vh;
+    right: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .formHeader {
+    padding: 20px 0;
+  }
+
+  .fas {
+    display: none;
+  }
+}
+
+
+
+/* Media queries end */

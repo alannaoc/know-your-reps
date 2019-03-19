@@ -10,7 +10,9 @@
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-scripts": "2.1.5",
-    "react-scroll": "^1.7.11"
+    "react-scroll": "^1.7.11",
+    "react-select": "^2.4.2",
+    "sweetalert2": "^8.3.0"
   },
   "scripts": {
     "predeploy": "npm run build",
@@ -28,5 +30,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "react-router-dom": "^5.0.0"
+  }
 }
