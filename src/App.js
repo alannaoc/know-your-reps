@@ -12,6 +12,9 @@ import axios from 'axios';
 const provider = new firebase.auth.GoogleAuthProvider()
 const auth = firebase.auth()
 
+provider.setCustomParameters({
+  prompt: "select_account"    // force google to ask which account to use
+})
 class App extends Component {
   constructor() {
     super();
