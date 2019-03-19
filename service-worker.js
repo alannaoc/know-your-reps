@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/alannaOConnorProject5/precache-manifest.1e04ba558d1a8d5686bfd5f72d3a7275.js"
+  "/know-your-reps/precache-manifest.53f0a317491abe0a3af56bf5cd583345.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/alannaOConnorProject5/index.html", {
+workbox.routing.registerNavigationRoute("/know-your-reps/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
