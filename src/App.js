@@ -223,7 +223,10 @@ class App extends Component {
         userPostalCode: test,
         show: true,
       })
-    });
+    })
+    .catch(function(error) {
+      Swal.fire("Sorry, looks like something went wrong on the server's side. Please try again soon!")
+    })
   }
 
   //handle change converts the user's input from lower case to uppercase and removes any white spaces. 
