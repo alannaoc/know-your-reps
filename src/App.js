@@ -15,6 +15,7 @@ const auth = firebase.auth()
 provider.setCustomParameters({
   prompt: "select_account"    // force google to ask which account to use
 })
+
 class App extends Component {
   constructor() {
     super();
@@ -49,7 +50,8 @@ class App extends Component {
     auth.signOut()
       .then(() => {
         this.setState({
-          user: null
+          user: null,
+          showSaved: false
         });
       });
   }
@@ -65,7 +67,6 @@ class App extends Component {
   }
 
   repsHandleClick = () => {
-    console.log('hi')
     scroll.scrollMore(700, {
       duration: 2800,
       delay: 200,
