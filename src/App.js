@@ -180,13 +180,13 @@ class App extends Component {
 
   //function for axios call 
   handleSubmit = (e) => {
+    console.log(e)
     e.preventDefault();
     axios({
       method: 'GET',
-      url: 'https://proxy.hackeryou.com',
+      url: `https://proxy.junocollege.com/https://represent.opennorth.ca/postcodes/${this.state.userPostalCode}`,
       dataResponse: 'json',
       params: {
-        reqUrl: `https://represent.opennorth.ca/postcodes/${this.state.userPostalCode}`,
         xmlToJSON: false,
       }
     }).then((res) => {
