@@ -11,7 +11,7 @@ const Header = (props) => {
             {props.savedReps.length > 0 ? <button onClick={props.repsHandleClick} className="button">Click here to see your list of saved reps ({props.savedReps.length}).</button> : <span> You haven't saved any reps yet, start a new search to do so.</span>
             }
             </p> : null}
-          {props.user ? <button onClick={props.logout} className="login button">Logout</button> : <button className="login button" onClick={props.login}>Login</button>}
+          {props.user ? <button onClick={props.logout} className="login button">Logout</button> : <button className="login button" onClick={props.login}>Log in</button>}
           <div className="wrapper formHeader">
             <h1>Know Your Reps</h1>
             
