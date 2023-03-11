@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "68348bd9d08c50ade044",
+    "revision": "0225a282cbca17d1bc0c",
     "url": "/know-your-reps/static/css/main.0e751719.chunk.css"
   },
   {
-    "revision": "68348bd9d08c50ade044",
-    "url": "/know-your-reps/static/js/main.68348bd9.chunk.js"
+    "revision": "0225a282cbca17d1bc0c",
+    "url": "/know-your-reps/static/js/main.0225a282.chunk.js"
   },
   {
     "revision": "2ae62d0254c62091a2f3",
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/know-your-reps/static/media/parliament.cf121a21.png"
   },
   {
-    "revision": "1d7378c56f80c8a3dab2a0303e263f74",
+    "revision": "fc89ba916328603a5219d23661cfcfc8",
     "url": "/know-your-reps/index.html"
   }
 ];
