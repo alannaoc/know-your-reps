@@ -29,7 +29,7 @@ const Main = (props) => {
                 }
               })}
             </ul>
-            {props.user ? <button className="button" value={props.userPostalCode} onClick={props.saveButton}>Save reps for {props.userPostalCode}</button> : <button onClick={props.login} className="button">Login to save reps</button>}
+            {props.user ? <button className="button" value={props.userPostalCode} onClick={props.saveButton}>Save reps for {props.userPostalCode}</button> : <button onClick={props.login} className="button">Log in to save reps</button>}
 
 
             {props.user && props.savedReps.length > 0 ? <button className="button" onClick={props.repsHandleClick} >Show my saved reps</button> : null}
